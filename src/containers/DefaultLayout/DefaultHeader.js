@@ -91,7 +91,7 @@ export default (props) => {
     });
   }, []);
   return (
-    <header>
+    <header className="header-v4">
       {/* Header desktop */}
       <div className="container-menu-desktop">
         {/* Topbar */}

@@ -5,6 +5,7 @@ import DefaultHeader from './DefaultHeader';
 import DefaultFooter from './DefaultFooter';
 import Card from 'components/customers/Card';
 import Home from 'views/Home';
+import Products from 'views/Products';
 
 export default () => {
   const loading = (
@@ -52,7 +53,8 @@ export default () => {
       </Suspense>
       <Suspense fallback={loading}>
         <Switch>
-          <Route path="/" component={Home}/>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/products" component={Products}/>
         </Switch>
         {/* Back to top */}
         <div className="btn-back-to-top" id="myBtn">
