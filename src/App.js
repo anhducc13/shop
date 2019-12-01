@@ -1,25 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Route, Router, Switch} from 'react-router-dom';
+import Loadable from 'react-loadable';
+import {browserHistory} from 'helpers';
+import './App.scss';
+import 'configs';
+
+const loading = () => (
+  <div className="animated fadeIn pt-3 text-center">Loading...</div>
+);
+
+// Containers
+const DefaultLayout = Loadable({
+  loader: () => import('./containers/DefaultLayout'),
+  loading,
+});
+
+const Page404 = Loadable({
+  loader: () => import('./views/Page404'),
+  loading,
+});
+
+const Page500 = Loadable({
+  loader: () => import('./views/Page500'),
+  loading,
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={browserHistory}>
+      <Switch>
+        <Route exact path="/404" name="Page 404" component={Page404}/>
+        <Route exact path="/500" name="Page 500" component={Page500}/>
+        <Route exact path="/" name="Home" component={DefaultLayout}/>
+      </Switch>
+    </Router>
   );
 }
 
