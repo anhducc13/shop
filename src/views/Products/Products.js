@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import $ from 'jquery';
 import Filters from 'components/customers/Filters';
 
 export default () => {
+  const [openFilter, setOpenFilter] = useState(false);
   useEffect(() => {
     $('.js-show-search').on('click', function () {
       $(this).toggleClass('show-search');
@@ -10,12 +11,17 @@ export default () => {
     });
   }, []);
 
+  const handleChangePaneFilter = (state) => setOpenFilter(state);
+
   return (
     <div className="bg0 p-b-140">
-      <Filters/>
+      <Filters
+        openFilter={openFilter}
+        handleChangePaneFilter={handleChangePaneFilter}
+      />
       <div className="container">
         <div className="flex-w flex-sb-m p-b-52">
-          <div className="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+          <div className="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4" onClick={() => handleChangePaneFilter(true)}>
             <i className="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"/>
             <i className="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"/>
             Lọc

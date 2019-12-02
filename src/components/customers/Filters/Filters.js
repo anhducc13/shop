@@ -1,32 +1,33 @@
 import React, {useEffect} from 'react';
-import $ from 'jquery';
 
-export default () => {
-  useEffect(() => {
-    /*==================================================================
-    [ Cart ]*/
-    $('.js-show-filter').on('click', function () {
-      $('.js-panel-filter').addClass('show-header-filter');
-    });
+import FilterItem from './FilterItem';
 
-    $('.js-hide-filter').on('click', function () {
-      $('.js-panel-filter').removeClass('show-header-filter');
-    });
-  }, []);
+export default (props) => {
+
+  const { openFilter, handleChangePaneFilter } = props;
 
   return (
-    <div className="wrap-header-filter js-panel-filter">
-      <div className="s-full js-hide-filter"/>
+    <div className={`wrap-header-filter ${openFilter ? 'show-header-filter': ''}`}>
+      <div className="s-full js-hide-filter" onClick={() => handleChangePaneFilter(false)}/>
       <div className="header-filter flex-col-l p-l-50 p-r-25">
         <div className="header-filter-title flex-w flex-sb-m p-b-8">
           <span className="mtext-103 cl2">
             Bộ lọc
           </span>
-          <div className="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-filter">
+          <div className="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04" onClick={() => handleChangePaneFilter(false)}>
             <i className="zmdi zmdi-close"/>
           </div>
         </div>
         <div className="header-filter-content flex-w js-pscroll">
+          <div className="header-filter-wrapitem w-full">
+            <FilterItem key={1} />
+            <FilterItem key={2}/>
+          </div>
+          {/*<Collapse className="header-filter-wrapitem">*/}
+          {/*  <FilterItem key={1} header="ductt" content="asfsdfsd"/>*/}
+          {/*  <FilterItem key={2} header="ductt" content="asfsdfsd"/>*/}
+          {/*  <FilterItem key={3} header="ductt" content="asfsdfsd"/>*/}
+          {/*</Collapse>*/}
           <ul className="header-filter-wrapitem w-full">
             <li className="header-filter-item flex-w flex-t m-b-12"/>
           </ul>
